@@ -7,7 +7,7 @@ app = Flask(__name__)
 s3 = boto3.client('s3')
 sqs = boto3.client('sqs')
 
-BUCKET_NAME = "mi-bucket-imagenes"
+BUCKET_NAME = "juan-cardonabucket"
 SQS_QUEUE_URL = "https://sqs.us-east-1.amazonaws.com/XXXXXXXXXXXX/mi-cola"
 
 

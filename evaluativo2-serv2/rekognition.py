@@ -17,13 +17,11 @@ def process_images():
             message = response['Messages'][0]
             filename = message['Body']
 
-            # Analizar imagen con Rekognition
             result = rekognition.detect_labels(
                 Image={'S3Object': {'Bucket': BUCKET_NAME, 'Name': filename}})
 
             print(f"Resultados para {filename}: {result}")
 
-            # Eliminar mensaje de la cola
             sqs.delete_message(QueueUrl=SQS_QUEUE_URL,
                                ReceiptHandle=message['ReceiptHandle'])
 
