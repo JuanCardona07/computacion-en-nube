@@ -5,7 +5,6 @@ app = Flask(__name__)
 
 
 def listar_archivos(bucket_name):
-    """Lista los nombres de los objetos dentro de un bucket S3."""
     s3 = boto3.client('s3')
 
     try:
