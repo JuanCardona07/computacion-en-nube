@@ -1,15 +1,17 @@
-FROM public.ecr.aws/lambda/python:3.10
+FROM python:3.10-slim
 
-# Instalar tesseract directamente
-RUN yum -y update && \
-    yum -y install tesseract
+RUN apt-get update && apt-get install -y \
+    tesseract-ocr \
+    libtesseract-dev \
+    libleptonica-dev \
+    poppler-utils \
+    tesseract-ocr-eng \
+    && apt-get clean
 
-# Instalar dependencias Python
+WORKDIR /app
+
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copiar tu código
 COPY app.py .
-
-# Definir el handler de Lambda
-CMD ["app.lambda_handler"]
+CMD ["python", "app.py"]
